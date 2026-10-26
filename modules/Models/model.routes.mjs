@@ -1,0 +1,29 @@
+import express from 'express';
+import {
+  getModels,
+  getModelsList,
+  getModelById,
+  addModel,
+  calculateDefectsPrice,
+  updateModel,
+  getModelNameAndId,
+  getModelByDeviceName,
+  
+} from './model.controller.mjs';
+import { verifyToken } from '../../middlewares/authMiddleware.mjs';
+
+const router = express.Router();
+router.get("/search", getModelNameAndId);
+
+router.get('/', getModels);
+
+router.get('/list', getModelsList);
+
+router.get('/by-device-name', getModelByDeviceName);
+router.get('/:id', getModelById);
+router.post('/', verifyToken, addModel);
+router.post('/calculate-defects-price', verifyToken, calculateDefectsPrice);
+router.put('/:id', verifyToken, updateModel);
+
+
+export default router;

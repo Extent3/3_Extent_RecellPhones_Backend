@@ -1,0 +1,19 @@
+import moment from "moment";
+import mongoose from "mongoose";
+
+
+const brandSchema = new mongoose.Schema({
+  name: String,
+  image: String,
+  thumbnailBase64: String,
+  possibleRamStorageComb: [String],
+  defects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Defect' }],
+  clickCount: {
+    type: Number,
+    default: 0
+  },
+  created_at: { type: Number, default: moment.utc().valueOf() },
+  updated_at: { type: Number, default: moment.utc().valueOf() }
+});
+
+export default mongoose.model('Brand', brandSchema);
